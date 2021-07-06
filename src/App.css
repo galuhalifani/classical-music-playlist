@@ -17,9 +17,19 @@
   color:unset
 }
 
+.holds-the-iframe {
+  background:url(./assets/animations/Loader.gif) top left no-repeat;
+}
+
 .playlistCard {
   display: grid;
   grid-template-columns: repeat(auto-fill, 24rem);
+  justify-content: space-between;
+  /* grid-gap: 20px; */
+}
+
+.playlistDetail {
+  display: flex;
   justify-content: space-between;
   /* grid-gap: 20px; */
 }

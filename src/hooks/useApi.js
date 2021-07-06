@@ -1,24 +1,27 @@
 import { useState, useEffect } from 'react'
 
-export default function useApi() {
+export default function useApi(url) {
+  console.log('use API!!', url)
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
     useEffect(() => {
+      if (url) {
         setLoading(true)
-        fetch("https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical")
+        fetch(`${url}`)
         .then(response => response.json())
         .then(data => {
           setData(data)
-          console.log(data.playlists.items)
+          console.log(`BERHASIL FETCH ${url}`)
         })
         .catch(err => {
           console.log(err)
           setError(true)
         })
         .finally(() => setLoading(false))
-      }, [])
+      }
+    }, [url])
 
     return {
         data,

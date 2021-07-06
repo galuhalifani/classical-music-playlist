@@ -5,7 +5,7 @@ import '../App.css';
 export default function PlaylistCard(props) {
     function seePlaylist(e, id) {
         e.preventDefault()
-        console.log(id)
+        props.playlistDetails(e, id)
     }
 
     function playListDesc(description) {
