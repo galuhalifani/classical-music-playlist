@@ -3,34 +3,29 @@ import './App.css';
 import PlaylistCard from './views/PlaylistCard.js'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import Loader from "./components/Loader.js";
+import Error from "./components/Error.js";
+import NoData from "./components/NoData.js";
+import useApi from "./hooks/useApi"
 
 export default function App() {
   const [appTitle] = useState("Your Classical Music Playlist")
-  const [playlists, setPlaylists] = useState([])
   const [renderedPlaylist, setRenderedPlaylist] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [playlistLength, setPlaylistLength] = useState(0)
+  const {data, loading, error} = useApi()
   const [searchBar, setSearchBar] = useState('')
 
   useEffect(() => {
-    setLoading(true)
-    fetch("https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical")
-    .then(response => response.json())
-    .then(data => {
-      setPlaylists(data.playlists.items)
+    if (data.playlists) {
       setRenderedPlaylist(data.playlists.items)
-      console.log(data.playlists.items)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    .finally(() => setLoading(false))
-  }, [])
+      setPlaylistLength(data.playlists.items.length)
+    }
+  }, [data])
 
   function searchPlaylist(event) {
     event.preventDefault()
-    let newPlaylist = playlists.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
-    // console.log(newPlaylist, 'FILTERED ARRAY')
+    let newPlaylist = data.playlists.items.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
     setRenderedPlaylist(newPlaylist)
+    setPlaylistLength(newPlaylist.length)
   }
 
   function searchBarChange(event) {
@@ -56,9 +51,7 @@ export default function App() {
 
       <div className='main_content'>
         {
-          loading 
-          ? <Loader/>
-          : <PlaylistCard playlists={renderedPlaylist}/>
+          loading ? <Loader/> : error ? <Error/> : playlistLength <= 0 ? <NoData/> : <PlaylistCard playlists={renderedPlaylist}/>
         }
       </div>
 

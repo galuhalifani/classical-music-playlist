@@ -5,6 +5,6 @@ import '../App.css';
 
 export default function Loader() {
     return (
-        <Lottie className='overlay' animationData={loadingAnimation} background="transparent" speed="1"  style={{margin:"auto"}}  loop autoplay></Lottie>
+        <Lottie className='overlay' animationData={loadingAnimation} background="transparent" speed="2"  style={{margin:"auto"}}  loop autoplay></Lottie>
     )
 }

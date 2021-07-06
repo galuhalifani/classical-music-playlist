@@ -13,6 +13,17 @@
   }
 }
 
+.description a {
+  color:unset
+}
+
+.playlistCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 24rem);
+  justify-content: space-between;
+  /* grid-gap: 20px; */
+}
+
 body {
   background-color: black;
   /* overflow-y: hidden */
@@ -46,6 +57,8 @@ body {
 #navbar {
   align-items:center;
   background-color:#301b1b;
+  padding-left: 8%;
+  padding-right: 8%
 }
 
 #navbar-nav {
@@ -66,7 +79,7 @@ body {
 .main_content {
     margin-left: 5%;
     margin-right: 5%;
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 40px;
     justify-content: space-between;
     background-color: black;
