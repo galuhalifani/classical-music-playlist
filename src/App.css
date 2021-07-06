@@ -13,6 +13,11 @@
   }
 }
 
+body {
+  background-color: black;
+  /* overflow-y: hidden */
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +27,36 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+#navbar {
+  align-items:center;
+  background-color:#301b1b;
+}
+
+#navbar-nav {
+  flex-direction: row;
+}
+
+#navbar-brand {
+  color: white
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.main_content {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    background-color: black;
+    color: white
 }
 
 .App-link {

@@ -1,6 +1,11 @@
 import React from 'react'
 import './App.css';
 import PlaylistCard from './views/PlaylistCard.js'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
 
 class App extends React.Component {
   constructor () {
@@ -22,16 +27,24 @@ class App extends React.Component {
   }
 
   render () {
-    var main_content = {
-      width: '100%',
-      marginBottom: '40px',
-      justifyContent: 'center'
-  };
-
     return (
       <div>
-      <h1>{this.state.appTitle}</h1>
-      <div style={main_content}>
+      <Navbar id='navbar' className='navbar-expand-lg navbar-dark'>
+        <Navbar.Brand className="navbar-brand" href="/">{this.state.appTitle}</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto" style={{marginLeft: '3%'}}>
+        <Nav.Link href="#home">Home</Nav.Link>
+        <Nav.Link href="#link">My Playlists</Nav.Link>
+        </Nav>
+        <Form inline>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Button variant="outline-success">Search</Button>
+        </Form>
+      </Navbar.Collapse>
+      </Navbar>
+
+      <div className='main_content'>
         <PlaylistCard playlists={this.state.playlists}/>
       </div>
       </div>
