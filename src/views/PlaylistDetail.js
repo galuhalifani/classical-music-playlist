@@ -6,10 +6,9 @@ import Error from "../components/Error.js";
 import { useParams } from "react-router-dom";
 import '../App.css';
 
-export default function PlaylistDetail(props) {
+export default function PlaylistDetail() {
     const {id} = useParams();
 
-    const prefix = props.prefix
     const {data: dataDetail, loading: loadingDetail, error: errorDetail} = useApi(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
     const playlist = dataDetail
     

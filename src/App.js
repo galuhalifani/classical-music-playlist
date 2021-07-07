@@ -11,7 +11,6 @@ export default function App() {
   console.log('RENDER APP')
   const [renderedPlaylist, setRenderedPlaylist] = useState([])
   const [playlistLength, setPlaylistLength] = useState(0)
-  const [prefix, setPrefix] = useState(null)
   const {data, loading, error} = useApi(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical`)
   const [activePage, setActivePage] = useState('home')
 
@@ -43,7 +42,7 @@ export default function App() {
           </Route>     
 
           <Route path="/playlist/:id">
-          <PlaylistDetail prefix={prefix}/>
+          <PlaylistDetail />
           </Route>     
 
           <Route path="/myPlaylist">
