@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import '../App.css';
+import { Link } from "react-router-dom";
 
 export default function Navigation(props) {
     const [searchBar, setSearchBar] = useState('')
@@ -15,13 +16,18 @@ export default function Navigation(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto" style={{marginLeft: '3%'}}>
-                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Link to="/" onClick={(e) => {props.toHome(e)}}>Home</Link>
                     <Nav.Link href="#link">My Playlists</Nav.Link>
                 </Nav>
-                <Form inline onSubmit={(e) => {props.searchPlaylist(e, searchBar)}}>
+                {
+                    props.activePage == 'home' ?
+                    <Form inline onSubmit={(e) => {props.searchPlaylist(e, searchBar)}}>
                     <FormControl type="text" placeholder="Search Playlist Title" name='search' className="mr-sm-2" onChange={searchBarChange}/>
                     <Button type='submit' variant="outline-success">Search</Button>
-                </Form>
+                    </Form>
+                    :
+                    null
+                }
                 </Navbar.Collapse>
         </Navbar>
     )

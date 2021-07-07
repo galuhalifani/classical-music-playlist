@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card'
+import useApi from "../hooks/useApi"
+import Loader from "../components/Loader.js";
+import Error from "../components/Error.js";
 import '../App.css';
 
 export default function PlaylistDetail(props) {
-    const playlist = props.playlist
+    const prefix = props.prefix
+    const {data: dataDetail, loading: loadingDetail, error: errorDetail} = useApi(prefix)
+    const playlist = dataDetail
 
     function playListDesc(description) {
         return {__html: description}
     }
 
     return (
-        <div>
+        <div className='main_content'>
         {
-            playlist.id ? 
+            loadingDetail ? <Loader/> : errorDetail ? <Error/> : playlist.id ? 
         
             <div className='playlistDetail m-3' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             <Card style={{backgroundColor: 'black', marginRight:'25px', marginBottom:'10px', width: '30%'}}>
@@ -27,7 +32,7 @@ export default function PlaylistDetail(props) {
                 </Card.Body>
             </Card>
             <div className="holds-the-iframe" style={{width:"70%", height: '100vh'}}>
-            <iframe title="`{playlist.id}`" src={`https://open.spotify.com/embed/playlist/${playlist.id}`} onload="$('.holds-the-iframe').css('background-image', 'none');" width= '100%' height='550px' frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe title="`{playlist.id}`" src={`https://open.spotify.com/embed/playlist/${playlist.id}`} onLoad="$('.holds-the-iframe').css('background-image', 'none');" width= '100%' height='550px' frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
             </div>
             :

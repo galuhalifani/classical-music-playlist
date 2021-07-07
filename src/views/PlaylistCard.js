@@ -1,5 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
+import Loader from "../components/Loader.js";
+import Error from "../components/Error.js";
+import NoData from "../components/NoData.js";
 import '../App.css';
 
 export default function PlaylistCard(props) {
@@ -13,7 +16,16 @@ export default function PlaylistCard(props) {
     }
 
     return (
-        <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+        <div className='main_content'>
+        {
+            props.loading 
+            ? <Loader/> 
+            : props.error 
+            ? <Error/> 
+            : props.playlistLength <= 0 
+            ? <NoData/> 
+            : 
+            <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             { props.playlists.map(playlist => 
                 <Card className='m-3' key={playlist.id} style={{width: '22rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
@@ -27,6 +39,8 @@ export default function PlaylistCard(props) {
                     </Card.Body>
                 </Card> 
             )}
+            </div>
+          }
         </div>
     )
 }
