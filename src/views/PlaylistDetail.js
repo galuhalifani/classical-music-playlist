@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card'
-import useApi from "../hooks/useApi"
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPlaylistDetail } from '../store/action'
 import '../App.css';
 
-export default function PlaylistDetail() {
+export default function PlaylistDetail(props) {
+    const select = useSelector
+    const dispatch = useDispatch()
     const {id} = useParams();
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const playlist = select(state => state.playlistDetail)
 
-    const {data: dataDetail, loading: loadingDetail, error: errorDetail} = useApi(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
-    const playlist = dataDetail
+    useEffect(() => {
+        props.changeActivePage('details')
+        setLoading(true)
+        fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+            dispatch(fetchPlaylistDetail(data))
+            console.log(`BERHASIL FETCH DETAIL`)
+        })
+        .catch(err => {
+            console.log(err)
+            setError(true)
+        })
+        .finally(() => setLoading(false))
+    }, [])
     
     function playListDesc(description) {
         return {__html: description}
@@ -19,7 +38,7 @@ export default function PlaylistDetail() {
     return (
         <div className='main_content'>
         {
-            loadingDetail ? <Loader/> : errorDetail ? <Error/> : playlist.id ? 
+            loading ? <Loader/> : error ? <Error/> : playlist.id ? 
         
             <div className='playlistDetail m-3' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             <Card style={{backgroundColor: 'black', marginRight:'25px', marginBottom:'10px', width: '30%'}}>

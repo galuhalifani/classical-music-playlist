@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import PlaylistCard from './views/PlaylistCard.js'
+import Home from './views/Home.js'
 import PlaylistDetail from './views/PlaylistDetail.js'
 import MyPlaylist from './views/MyPlaylist.js'
-import useApi from "./hooks/useApi"
+// import useApi from "./hooks/useApi"
 import Navigation from "./components/Navbar.js"
 import './App.css';
 import { Switch, Route } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 export default function App() {
+  const select = useSelector
+  const playlists = select(state => state.playlists)
+
   console.log('RENDER APP')
   const [renderedPlaylist, setRenderedPlaylist] = useState([])
-  const [playlistLength, setPlaylistLength] = useState(0)
-  const {data, loading, error} = useApi(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical`)
+  const [playlistLength, setPlaylistLength] = useState(1)
   const [activePage, setActivePage] = useState('home')
 
   useEffect(() => {
-    if (data.playlists) {
-      setRenderedPlaylist(data.playlists.items)
-      setPlaylistLength(data.playlists.items.length)
+    if (playlists) {
+      setRenderedPlaylist(playlists)
+      setPlaylistLength(playlists.length)
     }
-  }, [data])
+  }, [playlists])
 
   function searchPlaylist(event, searchBar) {
     event.preventDefault()
-    let newPlaylist = data.playlists.items.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
+    let newPlaylist = playlists.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
     setRenderedPlaylist(newPlaylist)
     setPlaylistLength(newPlaylist.length)
   }
@@ -38,11 +41,11 @@ export default function App() {
 
         <Switch>
           <Route exact path="/">
-          <PlaylistCard playlists={renderedPlaylist} data={data} loading={loading} error={error} playlistLength={playlistLength} changeActivePage={changeActivePage}/>
+          <Home renderedPlaylists={renderedPlaylist} playlistLength={playlistLength} changeActivePage={changeActivePage}/>
           </Route>     
 
           <Route path="/playlist/:id">
-          <PlaylistDetail />
+          <PlaylistDetail changeActivePage={changeActivePage}/>
           </Route>     
 
           <Route path="/myPlaylist">
