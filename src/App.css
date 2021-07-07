@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+/* .active {
+  color: red!Important
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -24,6 +28,13 @@
 .playlistCard {
   display: grid;
   grid-template-columns: repeat(auto-fill, 24rem);
+  justify-content: space-between;
+  /* grid-gap: 20px; */
+}
+
+.playlistCardFav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 19rem);
   justify-content: space-between;
   /* grid-gap: 20px; */
 }

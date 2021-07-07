@@ -48,7 +48,7 @@ export default function App() {
           </Route>     
 
           <Route path="/myPlaylist">
-          <MyPlaylist />
+          <MyPlaylist changeActivePage={changeActivePage}/>
           </Route>     
 
           <Route path="*">

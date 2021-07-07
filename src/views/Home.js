@@ -4,18 +4,27 @@ import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 import NoData from "../components/NoData.js";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchPlaylists, addFavourites } from '../store/action'
 import { useAlert } from 'react-alert'
 import '../App.css';
 
 export default function Home(props) {
+    const select = useSelector
     const alert = useAlert()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const history = useHistory()
     const dispatch = useDispatch()
     const activePage = props.changeActivePage
+    const favourites = select(state => state.favourites)
+
+    let favouritesId = []
+    for (let i = 0; i < favourites.length; i++) {
+        favouritesId.push(favourites[i].id)
+    }
+
+    const [subscribed, setSubscribed] = useState(favouritesId)
 
     useEffect(() => {
         activePage('home')
@@ -24,7 +33,7 @@ export default function Home(props) {
         .then(response => response.json())
         .then(data => {
             dispatch(fetchPlaylists(data.playlists.items))
-            console.log(`BERHASIL FETCH PLAYLISTS`)
+            // console.log(`BERHASIL FETCH PLAYLISTS`)
         })
         .catch(err => {
             console.log(err)
@@ -45,9 +54,16 @@ export default function Home(props) {
 
     function addFavourite(e, playlist) {
         e.preventDefault()
-        dispatch(addFavourites([playlist]))
-        alert.show('Success adding to favourites')
+        if (favouritesId.includes(playlist.id)) {
+            alert.error("Error: You've already added this to your favourites")            
+        } else {
+            dispatch(addFavourites(playlist))
+            setSubscribed([...subscribed, playlist.id])
+            alert.success(`Success: Added ${playlist.name} to favourites`)    
+        }
     }
+
+    // console.log(favourites)
 
     return (
         <div className='main_content'>
@@ -64,9 +80,12 @@ export default function Home(props) {
                 <Card className='m-3' key={playlist.id} style={{width: '22rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>
+
                         <div className="d-flex justify-content-between">
                             <Card.Title>{playlist.name}</Card.Title>
-                            <a href="/" onClick={(e) => addFavourite(e, playlist)}><i className='far fa-heart'></i></a>
+                            <a href="/" onClick={(e) => addFavourite(e, playlist)}>
+                                <i className={subscribed.includes(playlist.id) ? 'fas fa-heart' : 'far fa-heart'}></i>
+                            </a>
                         </div>
 
                         <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />
