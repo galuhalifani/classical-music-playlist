@@ -5,10 +5,12 @@ import Error from "../components/Error.js";
 import NoData from "../components/NoData.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { fetchPlaylists } from '../store/action'
+import { fetchPlaylists, addFavourites } from '../store/action'
+import { useAlert } from 'react-alert'
 import '../App.css';
 
 export default function Home(props) {
+    const alert = useAlert()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const history = useHistory()
@@ -41,6 +43,12 @@ export default function Home(props) {
         return {__html: description}
     }
 
+    function addFavourite(e, playlist) {
+        e.preventDefault()
+        dispatch(addFavourites([playlist]))
+        alert.show('Success adding to favourites')
+    }
+
     return (
         <div className='main_content'>
         {
@@ -56,7 +64,10 @@ export default function Home(props) {
                 <Card className='m-3' key={playlist.id} style={{width: '22rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>
-                        <Card.Title>{playlist.name}</Card.Title>
+                        <div className="d-flex justify-content-between">
+                            <Card.Title>{playlist.name}</Card.Title>
+                            <a href="/" onClick={(e) => addFavourite(e, playlist)}><i className='far fa-heart'></i></a>
+                        </div>
 
                         <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />
                         <div className='description overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />

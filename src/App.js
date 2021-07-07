@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Home from './views/Home.js'
 import PlaylistDetail from './views/PlaylistDetail.js'
 import MyPlaylist from './views/MyPlaylist.js'
-// import useApi from "./hooks/useApi"
 import Navigation from "./components/Navbar.js"
 import './App.css';
 import { Switch, Route } from "react-router-dom";

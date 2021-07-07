@@ -45,7 +45,6 @@ export default function PlaylistDetail(props) {
                 <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                 <Card.Body>
                     <Card.Title>{playlist.name}</Card.Title>
-
                     <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />
                     <Card.Text className='mb-0 mt-0'>Total Followers: {playlist.followers.total}</Card.Text><br />
                     <div className='description' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
