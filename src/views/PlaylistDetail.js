@@ -3,13 +3,16 @@ import Card from 'react-bootstrap/Card'
 import useApi from "../hooks/useApi"
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
+import { useParams } from "react-router-dom";
 import '../App.css';
 
 export default function PlaylistDetail(props) {
-    const prefix = props.prefix
-    const {data: dataDetail, loading: loadingDetail, error: errorDetail} = useApi(prefix)
-    const playlist = dataDetail
+    const {id} = useParams();
 
+    const prefix = props.prefix
+    const {data: dataDetail, loading: loadingDetail, error: errorDetail} = useApi(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
+    const playlist = dataDetail
+    
     function playListDesc(description) {
         return {__html: description}
     }

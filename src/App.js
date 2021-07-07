@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PlaylistCard from './views/PlaylistCard.js'
 import PlaylistDetail from './views/PlaylistDetail.js'
+import MyPlaylist from './views/MyPlaylist.js'
 import useApi from "./hooks/useApi"
 import Navigation from "./components/Navbar.js"
 import './App.css';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 export default function App() {
   console.log('RENDER APP')
@@ -15,7 +16,7 @@ export default function App() {
   const [activePage, setActivePage] = useState('home')
 
   useEffect(() => {
-    if (data.playlists && activePage == 'home') {
+    if (data.playlists) {
       setRenderedPlaylist(data.playlists.items)
       setPlaylistLength(data.playlists.items.length)
     }
@@ -28,33 +29,32 @@ export default function App() {
     setPlaylistLength(newPlaylist.length)
   }
 
-  function playlistDetails(e, id) {
-    e.preventDefault()
-    setPrefix(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
-    setActivePage('details')
-  }
-  
-  function toHome(e) {
-    e.preventDefault()
-    setActivePage('home')
+  function changeActivePage(page) {
+    setActivePage(page)
   }
 
     return (
-      <BrowserRouter>
-          <div>
-            <Navigation searchPlaylist={searchPlaylist} activePage={activePage} toHome={toHome}/>
+      <div>
+        <Navigation searchPlaylist={searchPlaylist} activePage={activePage}/>
 
-            <Switch>
-              <Route path="/details">
-              <PlaylistDetail prefix={prefix}/>
-              </Route>     
+        <Switch>
+          <Route exact path="/">
+          <PlaylistCard playlists={renderedPlaylist} data={data} loading={loading} error={error} playlistLength={playlistLength} changeActivePage={changeActivePage}/>
+          </Route>     
 
-              <Route path="/">
-              <PlaylistCard playlists={renderedPlaylist} playlistDetails={playlistDetails} data={data} loading={loading} error={error} playlistLength={playlistLength}/>
-              </Route>     
-  
-          </Switch>
-          </div>
-      </BrowserRouter>
+          <Route path="/playlist/:id">
+          <PlaylistDetail prefix={prefix}/>
+          </Route>     
+
+          <Route path="/myPlaylist">
+          <MyPlaylist />
+          </Route>     
+
+          <Route path="*">
+            <h1>Page Not Found</h1>
+          </Route>
+
+        </Switch>
+      </div>
     ) 
 }

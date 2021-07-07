@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import '../App.css';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navigation(props) {
     const [searchBar, setSearchBar] = useState('')
@@ -16,8 +16,8 @@ export default function Navigation(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto" style={{marginLeft: '3%'}}>
-                    <Link to="/" onClick={(e) => {props.toHome(e)}}>Home</Link>
-                    <Nav.Link href="#link">My Playlists</Nav.Link>
+                    <NavLink className='nav-link' to="/">Home</NavLink>
+                    <NavLink className='nav-link' to="/myPlaylist">My Playlist</NavLink>
                 </Nav>
                 {
                     props.activePage == 'home' ?

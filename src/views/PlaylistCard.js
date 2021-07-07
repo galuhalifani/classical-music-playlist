@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 import NoData from "../components/NoData.js";
+import { useHistory } from "react-router-dom";
 import '../App.css';
 
 export default function PlaylistCard(props) {
+
+    useEffect(() => {
+        props.changeActivePage('home')
+    }, [])
+
+    const history = useHistory()
+
     function seePlaylist(e, id) {
         e.preventDefault()
-        props.playlistDetails(e, id)
+        props.changeActivePage('details')
+        history.push(`/playlist/${id}`)
     }
 
     function playListDesc(description) {
@@ -35,7 +44,7 @@ export default function PlaylistCard(props) {
                         <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />
                         <div className='description overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
 
-                        <Card.Link onClick={(e) => seePlaylist(e, playlist.id)} className="btn btn-primary">See Playlist</Card.Link>
+                        <Card.Link className="btn btn-primary" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>
                 </Card> 
             )}
