@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchArtists } from '../store/actions/actionPlaylist'
+import { fetchArtists, toggleLoading, setArtists, setArtistName } from '../store/actions/actionPlaylist'
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 
@@ -9,7 +9,8 @@ export default function Artist(props) {
     const dispatch = useDispatch()
     const select = useSelector
     const artists = select(state => state.playlists.artists)
-    const [searchBarArtist, setArtist] = useState('Wolfgang Amadeus Mozart')
+    const artist_name = select(state => state.playlists.artist_name)
+    const [searchBarArtist, setArtist] = useState(artist_name)
     const error = select(state => state.playlists.error)
     const loading = select(state => state.playlists.loading)
 
@@ -19,7 +20,10 @@ export default function Artist(props) {
 
     function submitArtist(e) {
         e.preventDefault()
-        dispatch(fetchArtists(searchBarArtist))
+        if (searchBarArtist !== '') {
+            dispatch(setArtistName(searchBarArtist))
+            dispatch(fetchArtists(searchBarArtist))
+        }
     }
 
     useEffect(() => {
@@ -30,27 +34,31 @@ export default function Artist(props) {
     return (
         <div className='main_content'>
             <div style={{margin:'auto', paddingTop: '4%', textAlign: 'center'}}>
-                <h1 style={{margin: 'auto', color:'lightyellow'}}>Search Album by Artists</h1><br />
-                <Form onSubmit={(e) => {submitArtist(e)}} style={{marginRight: '50px', marginLeft: '10px'}}>
+                <h1 style={{margin: 'auto', color:'lightyellow'}}>Browse by Composer</h1><br />
+                <Form onSubmit={(e) => {submitArtist(e)}} style={{marginRight: '10px', marginLeft: '10px'}}>
                     <label>
                         Select Composer:<br />
                         <select value={searchBarArtist} onChange={searchArtist}>
+                            <option value="">---SELECT---</option>
                             <option value="Wolfgang Amadeus Mozart">Wolfgang Amadeus Mozart</option>
                             <option value="Ludwig Van Beethoven">Ludwig Van Beethoven</option>
-                            <option value="Tchaikosvsky">Tchaikosvsky</option>
-                            <option value="Chopin">Chopin</option>
+                            <option value="Tchaikosvsky">Pyotr Ilyich Tchaikovsky</option>
+                            <option value="Chopin">Frédéric Chopin</option>
+                            <option value="Franz Liszt">Franz Liszt</option>
+                            <option value="Johannes Brahms">Johannes Brahms</option>
+                            <option value="Johann Sebastian Bach">Johann Sebastian Bach</option>
                         </select>
                     </label><br />
                     <button type='submit' className="btn btn-success" style={{marginTop: '2%', width:'150px'}}>Search</button>
                 </Form>
             </div>
         {
+            loading 
+            ? <Loader/> 
+            :
             artists.length === 0 
             ? 
             null
-            : 
-            loading 
-            ? <Loader/> 
             : error 
             ? <Error/> 
             :

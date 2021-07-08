@@ -17,7 +17,7 @@ export default function App() {
 
     return (
       <div>
-        <Navigation activePage={activePage}/>
+        <Navigation activePage={activePage} />
 
         <Switch>
           <Route exact path="/">

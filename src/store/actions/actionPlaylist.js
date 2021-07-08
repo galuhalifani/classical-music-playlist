@@ -1,4 +1,4 @@
-import { SET_HOME_SEARCH_BAR, SET_ARTISTS, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
+import { SET_HOME_SEARCH_BAR, SET_ARTIST_NAME, SET_ARTISTS, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
 
 export function setPlaylists(input) {
     return {
@@ -42,11 +42,18 @@ export function setArtists(input) {
     }
 }
 
+export function setArtistName(input) {
+    return {
+        type: SET_ARTIST_NAME,
+        payload: input
+    }
+}
+
 export function fetchPlaylists() {
     return function(dispatch) {
         dispatch(toggleError(false))
         dispatch(toggleLoading(true))
-        fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical')
+        fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical&perPage=15')
         .then(response => response.json())
         .then(data => {
             dispatch(setPlaylists(data.playlists.items))
@@ -84,7 +91,7 @@ export function fetchArtists(name) {
         let query = name.replace(/ /g, '%')
         dispatch(toggleError(false))
         dispatch(toggleLoading(true))
-        fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/search?q=${query}&perPage=10`)
+        fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/search?q=${query}&perPage=8`)
         .then(response => response.json())
         .then(data => {
             dispatch(setArtists(data.albums.items))
