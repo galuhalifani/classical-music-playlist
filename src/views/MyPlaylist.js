@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Card from 'react-bootstrap/Card'
+import { Card, Row, Col } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import '../App.css';
@@ -49,9 +49,11 @@ export default function MyPlaylist(props) {
             : 
             <div>
             <h1 style={{paddingLeft:'6%', paddingTop: '2%', paddingRight: '5%'}}>My Favourite Playlists</h1>
-            <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}>
+            <Row className='playlistCardFav' xs={2} md={2} lg={3} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            {/* <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { favourites.map(playlist => 
-                <Card className='m-2' key={playlist.id} style={{width: '18rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
+                <Col style={{marginBottom:'2%', marginTop: '2%'}}>
+                <Card key={playlist.id} style={{height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>
                         <Card.Title>{playlist.name}</Card.Title>
@@ -62,8 +64,10 @@ export default function MyPlaylist(props) {
                         <Card.Link className="btn btn-primary" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>
                 </Card> 
+                </Col>
             )}
-            </div>
+            {/* </div> */}
+            </Row>
             </div>
           }
         </div>

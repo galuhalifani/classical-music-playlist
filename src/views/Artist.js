@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Form } from 'react-bootstrap'
+import { Card, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchArtists, toggleLoading, setArtists, setArtistName } from '../store/actions/actionPlaylist'
 import Loader from "../components/Loader.js";
@@ -34,7 +34,7 @@ export default function Artist(props) {
     return (
         <div className='main_content'>
             <div style={{margin:'auto', paddingTop: '4%', textAlign: 'center'}}>
-                <h1 style={{margin: 'auto', color:'lightyellow'}}>Browse by Composer</h1><br />
+                <h1 style={{margin: 'auto', color:'lightyellow'}}>Albums by Composer</h1><br />
                 <Form onSubmit={(e) => {submitArtist(e)}} style={{marginRight: '10px', marginLeft: '10px'}}>
                     <label>
                         Select Composer:<br />
@@ -62,21 +62,25 @@ export default function Artist(props) {
             : error 
             ? <Error/> 
             :
-            <div style={{marginTop:'50px'}}>
-            <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}>
+            <div style={{marginTop:'10px'}}>
+            <Row className='playlistCardFav' xs={1} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            {/* <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { artists.map(artist => 
-                <Card className='m-2' key={artist.id} style={{width: '18rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
+                <Col style={{marginBottom:'2%', marginTop: '1%', textAlign: 'center'}}>
+                <Card className='m-2' key={artist.id} style={{width: '18rem', height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa'}}>
                     <img className='class="card-img-top' src={artist.images[0].url} alt="Artist Poster"/>
                     <Card.Body>
-                        <Card.Title>{artist.name}</Card.Title>
+                        <Card.Title className='overflow ellipsis'>{artist.name}</Card.Title>
 
                         <Card.Text className='mb-0 mt-0'>Total Tracks: {artist.total_tracks}</Card.Text><br />
 
                         <iframe title="`{artist.id}`" src={`https://open.spotify.com/embed/album/${artist.id}`} width= '100%' height='80px' frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </Card.Body>
                 </Card> 
+                </Col>
             )}
-            </div>
+            </Row>
+            {/* </div> */}
             </div>
           }
         </div> 

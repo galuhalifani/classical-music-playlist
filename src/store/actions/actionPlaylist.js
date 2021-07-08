@@ -53,7 +53,7 @@ export function fetchPlaylists() {
     return function(dispatch) {
         dispatch(toggleError(false))
         dispatch(toggleLoading(true))
-        fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical&perPage=15')
+        fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical&perPage=30')
         .then(response => response.json())
         .then(data => {
             dispatch(setPlaylists(data.playlists.items))
