@@ -10,7 +10,6 @@ const alertStyleSuccess = {
     paddingRight: '2px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    borderRadius: '3px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -28,7 +27,6 @@ const alertStyleSuccess = {
     paddingRight: '2px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    borderRadius: '3px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -46,7 +44,6 @@ const alertStyleSuccess = {
     paddingRight: '2px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    borderRadius: '3px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -66,7 +63,7 @@ const alertStyleSuccess = {
   }
   
   const AlertTemplate = ({ message, options, style, close }) => {
-    if (options.type == 'success') {
+    if (options.type === 'success') {
         return (
             <div style={{ ...alertStyleSuccess, ...style }}>
               {options.type === 'success' && <SuccessIcon />}
@@ -76,7 +73,7 @@ const alertStyleSuccess = {
               </button>
             </div>
           )                
-    } else if (options.type == 'error') {
+    } else if (options.type === 'error') {
         return (
             <div style={{ ...alertStyleError, ...style }}>
             {options.type === 'error' && <ErrorIcon />}

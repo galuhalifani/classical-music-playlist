@@ -1,4 +1,4 @@
-import { FETCH_PLAYLISTS, FETCH_PLAYLIST_DETAIL } from './actionTypes'
+import { SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
 
 const initialState = {
     appTitle: 'Your Classical Music Playlist',
@@ -9,11 +9,15 @@ const initialState = {
 }
 
 function playlistReducer(state = initialState, action) {
-    if (action.type === FETCH_PLAYLISTS ) {
+    if (action.type === SET_PLAYLISTS ) {
         return { ...state, playlists: action.payload }
-    } else if (action.type === FETCH_PLAYLIST_DETAIL ) {
+    } else if (action.type === SET_PLAYLIST_DETAIL ) {
         return { ...state, playlistDetail: action.payload }
-    } 
+    } else if (action.type === TOGGLE_LOADING ) {
+        return { ...state, loading: action.payload }
+    } else if (action.type === TOGGLE_ERROR ) {
+        return { ...state, error: action.payload }
+    }
 
     return state
 }

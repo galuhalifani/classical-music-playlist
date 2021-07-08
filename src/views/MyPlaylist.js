@@ -14,7 +14,7 @@ export default function MyPlaylist(props) {
 
     useEffect(() => {
         activePage('favourites')
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function seePlaylist(e, id) {
@@ -36,11 +36,11 @@ export default function MyPlaylist(props) {
     return (
         <div className='main_content'>
         {
-            favourites.length == 0 
+            favourites.length === 0 
             ? 
             <div style={{margin:'auto', paddingTop: '4%', textAlign: 'center'}}>
-                <h1 style={{color: 'white', margin: 'auto', color:'red'}}>Oops, No Favourites.</h1><br />
-                <h2 style={{color: 'white', margin: 'auto', color:'#cdcda3'}}>Add a Favourite First</h2>
+                <h1 style={{margin: 'auto', color:'red'}}>Oops, No Favourites.</h1><br />
+                <h2 style={{margin: 'auto', color:'#cdcda3'}}>Add a Favourite First</h2>
                 <div style={{height: '200px'}}>
                     <Lottie animationData={animation} background="transparent" speed="2"  style={{margin:"auto", marginTop: '2%', height:"100%"}} loop autoplay></Lottie>
                 </div>

@@ -5,20 +5,23 @@ import Error from "../components/Error.js";
 import NoData from "../components/NoData.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPlaylists, addFavourites } from '../store/action'
+import { fetchPlaylists } from '../store/actions/actionPlaylist'
+import { addFavourites } from '../store/actions/actionFavourite'
 import { useAlert } from 'react-alert'
 import '../App.css';
 
 export default function Home(props) {
     const alert = useAlert()
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    // const [loading, setLoading] = useState(false)
+    // const [error, setError] = useState(false)
     const history = useHistory()
     const activePage = props.changeActivePage
 
     const select = useSelector
     const dispatch = useDispatch()
     const favourites = select(state => state.favourites.favourites)
+    const error = select(state => state.playlists.error)
+    const loading = select(state => state.playlists.loading)
 
     let favouritesId = []
     for (let i = 0; i < favourites.length; i++) {
@@ -29,18 +32,8 @@ export default function Home(props) {
 
     useEffect(() => {
         activePage('home')
-        setLoading(true)
-        fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical')
-        .then(response => response.json())
-        .then(data => {
-            dispatch(fetchPlaylists(data.playlists.items))
-            // console.log(`BERHASIL FETCH PLAYLISTS`)
-        })
-        .catch(err => {
-            console.log(err)
-            setError(true)
-        })
-        .finally(() => setLoading(false))
+        dispatch(fetchPlaylists())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function seePlaylist(e, id) {

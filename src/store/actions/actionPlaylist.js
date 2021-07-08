@@ -1,4 +1,4 @@
-import { SET_PLAYLISTS, SET_PLAYLIST_DETAIL, ADD_FAVOURITES, TOGGLE_LOADING, TOGGLE_ERROR } from './actionTypes'
+import { SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
 
 export function setPlaylists(input) {
     return {
@@ -10,13 +10,6 @@ export function setPlaylists(input) {
 export function setPlaylistDetail(input) {
     return {
         type: SET_PLAYLIST_DETAIL,
-        payload: input
-    }
-}
-
-export function addFavourites(input) {
-    return {
-        type: ADD_FAVOURITES,
         payload: input
     }
 }

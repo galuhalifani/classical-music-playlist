@@ -1,34 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPlaylistDetail } from '../store/action'
+import { fetchPlaylistDetail } from '../store/actions/actionPlaylist'
 import '../App.css';
 
 export default function PlaylistDetail(props) {
     const select = useSelector
     const dispatch = useDispatch()
     const {id} = useParams();
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const error = select(state => state.playlists.error)
+    const loading = select(state => state.playlists.loading)
     const playlist = select(state => state.playlists.playlistDetail)
+
+    // useEffect(() => {
+    //     props.changeActivePage('details')
+    //     setLoading(true)
+    //     fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         dispatch(setPlaylistDetail(data))
+    //         console.log(`BERHASIL FETCH DETAIL`)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //         setError(true)
+    //     })
+    //     .finally(() => setLoading(false))
+    // }, [])
 
     useEffect(() => {
         props.changeActivePage('details')
-        setLoading(true)
-        fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/playlists?id=${id}`)
-        .then(response => response.json())
-        .then(data => {
-            dispatch(fetchPlaylistDetail(data))
-            console.log(`BERHASIL FETCH DETAIL`)
-        })
-        .catch(err => {
-            console.log(err)
-            setError(true)
-        })
-        .finally(() => setLoading(false))
+        dispatch(fetchPlaylistDetail(id))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     function playListDesc(description) {
