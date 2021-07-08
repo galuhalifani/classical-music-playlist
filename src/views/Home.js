@@ -12,16 +12,23 @@ import '../App.css';
 
 export default function Home(props) {
     const alert = useAlert()
-    // const [loading, setLoading] = useState(false)
-    // const [error, setError] = useState(false)
     const history = useHistory()
     const activePage = props.changeActivePage
-
     const select = useSelector
     const dispatch = useDispatch()
     const favourites = select(state => state.favourites.favourites)
     const error = select(state => state.playlists.error)
     const loading = select(state => state.playlists.loading)
+    const playlists = select(state => state.playlists.playlists)
+    const searchBar = select(state => state.playlists.searchBar)
+    // const [playlistLength, setPlaylistLength] = useState(playlists.length)
+
+    let filteredPlaylist = playlists
+
+    if (searchBar !== '') {
+        console.log('searchBar keganti!!!!!')
+        filteredPlaylist = playlists.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
+    }
 
     let favouritesId = []
     for (let i = 0; i < favourites.length; i++) {
@@ -57,8 +64,6 @@ export default function Home(props) {
         }
     }
 
-    // console.log(favourites)
-
     return (
         <div className='main_content'>
         {
@@ -66,11 +71,11 @@ export default function Home(props) {
             ? <Loader/> 
             : error 
             ? <Error/> 
-            : props.playlistLength <= 0 
+            : filteredPlaylist.length <= 0 
             ? <NoData/> 
             : 
             <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
-            { props.renderedPlaylists.map(playlist => 
+            { filteredPlaylist.map(playlist => 
                 <Card className='m-3' key={playlist.id} style={{width: '22rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>

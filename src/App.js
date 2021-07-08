@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Home from './views/Home.js'
 import PlaylistDetail from './views/PlaylistDetail.js'
 import MyPlaylist from './views/MyPlaylist.js'
 import Navigation from "./components/Navbar.js"
 import { Switch, Route } from "react-router-dom";
-import { useSelector } from 'react-redux'
 import './App.css';
 
 export default function App() {
-  const select = useSelector
-  const playlists = select(state => state.playlists.playlists)
-
   console.log('RENDER APP')
-  const [renderedPlaylist, setRenderedPlaylist] = useState([])
-  const [playlistLength, setPlaylistLength] = useState(1)
   const [activePage, setActivePage] = useState('home')
-
-  useEffect(() => {
-    if (playlists) {
-      setRenderedPlaylist(playlists)
-      setPlaylistLength(playlists.length)
-    }
-  }, [playlists])
-
-  function searchPlaylist(event, searchBar) {
-    event.preventDefault()
-    let newPlaylist = playlists.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
-    setRenderedPlaylist(newPlaylist)
-    setPlaylistLength(newPlaylist.length)
-  }
 
   function changeActivePage(page) {
     setActivePage(page)
@@ -36,11 +16,11 @@ export default function App() {
 
     return (
       <div>
-        <Navigation searchPlaylist={searchPlaylist} activePage={activePage}/>
+        <Navigation activePage={activePage}/>
 
         <Switch>
           <Route exact path="/">
-          <Home renderedPlaylists={renderedPlaylist} playlistLength={playlistLength} changeActivePage={changeActivePage}/>
+          <Home changeActivePage={changeActivePage}/>
           </Route>     
 
           <Route path="/playlist/:id">

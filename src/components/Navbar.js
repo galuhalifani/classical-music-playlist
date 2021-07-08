@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import React, { useMemo } from 'react'
+import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import '../App.css';
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setHomeSearchBar } from '../store/actions/actionPlaylist'
+import debounce from 'lodash.debounce';
 
 export default function Navigation(props) {
+    const dispatch = useDispatch()
     const select = useSelector
     const appTitle = select(state => state.playlists.appTitle)
-    const [searchBar, setSearchBar] = useState('')
+    // const [searchBar, setSearchBar] = useState('')
 
     function searchBarChange(event) {
-        setSearchBar(event.target.value)
+        dispatch(setHomeSearchBar(event.target.value))
     }
+
+    const debouncedChangeHandler = useMemo(
+        () => debounce(searchBarChange, 300)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    , []);
 
     return (
         <Navbar id='navbar' className='navbar-expand-lg navbar-dark'>
@@ -24,10 +32,14 @@ export default function Navigation(props) {
                 </Nav>
                 {
                     props.activePage === 'home' ?
-                    <Form inline onSubmit={(e) => {props.searchPlaylist(e, searchBar)}}>
-                    <FormControl type="text" placeholder="Search Playlist Title" name='search' className="mr-sm-2" onChange={searchBarChange}/>
-                    <Button type='submit' variant="outline-success">Search</Button>
+                    <span className='d-flex' style={{fontSize: '1rem', color: 'grey'}}>
+                        <i style={{margin: 'auto', fontSize: '130%'}} className='fas fa-search text-gray-600' data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="Back to Homepage"></i>
+                    <Form inline style={{marginRight: '50px', marginLeft: '10px'}}>
+                    <FormControl type="text" placeholder="Search Playlist By Title" name='search' className="mr-sm-2" onChange={debouncedChangeHandler}/>
+                    {/* <Button type='submit' variant="outline-success">Search</Button> */}
                     </Form>
+                    </span>
                     :
                     null
                 }
