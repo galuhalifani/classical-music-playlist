@@ -1,4 +1,4 @@
-import { SET_HOME_SEARCH_BAR, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
+import { SET_HOME_SEARCH_BAR, SET_ARTISTS, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
 
 export function setPlaylists(input) {
     return {
@@ -35,6 +35,13 @@ export function toggleError(input) {
     }
 }
 
+export function setArtists(input) {
+    return {
+        type: SET_ARTISTS,
+        payload: input
+    }
+}
+
 export function fetchPlaylists() {
     return function(dispatch) {
         dispatch(toggleError(false))
@@ -63,6 +70,25 @@ export function fetchPlaylistDetail(id) {
         .then(data => {
             dispatch(setPlaylistDetail(data))
             console.log(`BERHASIL FETCH PLAYLISTS`)
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(toggleError(true))
+        })
+        .finally(() => dispatch(toggleLoading(false)))
+    }
+}
+
+export function fetchArtists(name) {
+    return function(dispatch) {
+        let query = name.replace(/ /g, '%')
+        dispatch(toggleError(false))
+        dispatch(toggleLoading(true))
+        fetch(`https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/search?q=${query}&perPage=10`)
+        .then(response => response.json())
+        .then(data => {
+            dispatch(setArtists(data.albums.items))
+            console.log(`BERHASIL FETCH ARTISTS`)
         })
         .catch(err => {
             console.log(err)

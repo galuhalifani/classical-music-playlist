@@ -21,12 +21,10 @@ export default function Home(props) {
     const loading = select(state => state.playlists.loading)
     const playlists = select(state => state.playlists.playlists)
     const searchBar = select(state => state.playlists.searchBar)
-    // const [playlistLength, setPlaylistLength] = useState(playlists.length)
 
     let filteredPlaylist = playlists
 
     if (searchBar !== '') {
-        console.log('searchBar keganti!!!!!')
         filteredPlaylist = playlists.filter(list => list.name.toLowerCase().includes(searchBar.toLowerCase()))
     }
 
