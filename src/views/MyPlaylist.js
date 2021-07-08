@@ -2,17 +2,15 @@ import React, { useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux'
-// import { fetchPlaylists, addFavourites } from '../store/action'
 import '../App.css';
 import Lottie from "lottie-react";
 import animation from "../assets/animations/24815-crying-heart.json"
-import image from "../assets/pic/magnifyingglass.jpg"   
 
 export default function MyPlaylist(props) {
     const history = useHistory()
     const select = useSelector
     const activePage = props.changeActivePage
-    const favourites = select(state => state.favourites)
+    const favourites = select(state => state.favourites.favourites)
 
     useEffect(() => {
         activePage('favourites')
@@ -44,9 +42,8 @@ export default function MyPlaylist(props) {
                 <h1 style={{color: 'white', margin: 'auto', color:'red'}}>Oops, No Favourites.</h1><br />
                 <h2 style={{color: 'white', margin: 'auto', color:'#cdcda3'}}>Add a Favourite First</h2>
                 <div style={{height: '200px'}}>
-                <Lottie animationData={animation} background="transparent" speed="2"  style={{margin:"auto", marginTop: '2%', height:"100%"}} loop autoplay></Lottie>
+                    <Lottie animationData={animation} background="transparent" speed="2"  style={{margin:"auto", marginTop: '2%', height:"100%"}} loop autoplay></Lottie>
                 </div>
-                {/* <img src={image} alt="Error Poster" style={{marginLeft: '1%', marginTop: '2%', width: '20%'}}/><br/> */}
                 <button className="btn btn-dark" onClick={(e) => toHome(e)} style={{marginTop: '2%', width:'300px'}}>Back To Home</button>
             </div>
             : 

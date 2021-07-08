@@ -1,26 +1,14 @@
-import { createStore } from 'redux'
-import { FETCH_PLAYLISTS, FETCH_PLAYLIST_DETAIL, ADD_FAVOURITES } from './actionTypes'
+import { createStore, combineReducers } from 'redux'
+import playlistReducer from './reducers/playlists'
+import favouriteReducer from './reducers/favourites'
 
-const initialState = {
-    appTitle: 'Your Classical Music Playlist',
-    playlists: [],
-    playlistDetail: {},
-    favourites: [] 
-}
-
-function reducer(state = initialState, action) {
-    if (action.type === FETCH_PLAYLISTS ) {
-        return { ...state, playlists: action.payload }
-    } else if (action.type === FETCH_PLAYLIST_DETAIL ) {
-        return { ...state, playlistDetail: action.payload }
-    } else if (action.type === ADD_FAVOURITES ) {
-        return { ...state, favourites: [...state.favourites, action.payload] }
-    }
-    return state
-}
+const reducers =  combineReducers({
+    playlists: playlistReducer,
+    favourites: favouriteReducer
+})
 
 const store = createStore(
-    reducer,
+    reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

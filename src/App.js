@@ -3,13 +3,13 @@ import Home from './views/Home.js'
 import PlaylistDetail from './views/PlaylistDetail.js'
 import MyPlaylist from './views/MyPlaylist.js'
 import Navigation from "./components/Navbar.js"
-import './App.css';
 import { Switch, Route } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import './App.css';
 
 export default function App() {
   const select = useSelector
-  const playlists = select(state => state.playlists)
+  const playlists = select(state => state.playlists.playlists)
 
   console.log('RENDER APP')
   const [renderedPlaylist, setRenderedPlaylist] = useState([])

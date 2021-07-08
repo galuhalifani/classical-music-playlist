@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 export default function Navigation(props) {
     const select = useSelector
-    const appTitle = select(state => state.appTitle)
+    const appTitle = select(state => state.playlists.appTitle)
     const [searchBar, setSearchBar] = useState('')
 
     function searchBarChange(event) {

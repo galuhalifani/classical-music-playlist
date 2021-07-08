@@ -13,7 +13,7 @@ export default function PlaylistDetail(props) {
     const {id} = useParams();
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const playlist = select(state => state.playlistDetail)
+    const playlist = select(state => state.playlists.playlistDetail)
 
     useEffect(() => {
         props.changeActivePage('details')

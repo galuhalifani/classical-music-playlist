@@ -10,14 +10,15 @@ import { useAlert } from 'react-alert'
 import '../App.css';
 
 export default function Home(props) {
-    const select = useSelector
     const alert = useAlert()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const history = useHistory()
-    const dispatch = useDispatch()
     const activePage = props.changeActivePage
-    const favourites = select(state => state.favourites)
+
+    const select = useSelector
+    const dispatch = useDispatch()
+    const favourites = select(state => state.favourites.favourites)
 
     let favouritesId = []
     for (let i = 0; i < favourites.length; i++) {
