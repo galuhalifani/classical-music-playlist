@@ -49,7 +49,7 @@ export default function MyPlaylist(props) {
             : 
             <div>
             <h1 style={{paddingLeft:'6%', paddingTop: '2%', paddingRight: '5%'}}>My Favourite Playlists</h1>
-            <Row className='playlistCardFav' xs={2} md={2} lg={3} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            <Row className='playlistCardFav' xs={2} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             {/* <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { favourites.map(playlist => 
                 <Col style={{marginBottom:'2%', marginTop: '2%'}}>
