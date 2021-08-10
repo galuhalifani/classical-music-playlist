@@ -56,8 +56,10 @@ export function fetchPlaylists() {
         fetch('https://v1.nocodeapi.com/galuhalifani/spotify/rGPSdDBWgbWtmwxO/browse/categoryPlaylist?category_id=classical&perPage=30')
         .then(response => response.json())
         .then(data => {
-            dispatch(setPlaylists(data.playlists.items))
-            console.log(`BERHASIL FETCH PLAYLISTS`)
+            if (data.playlists.items) {
+                dispatch(setPlaylists(data.playlists.items))
+                console.log(`BERHASIL FETCH PLAYLISTS`)    
+            }
         })
         .catch(err => {
             console.log(err)

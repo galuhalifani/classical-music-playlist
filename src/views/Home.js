@@ -76,19 +76,19 @@ export default function Home(props) {
                 <Col style={{marginBottom:'2%', marginTop: '2%'}}>
                 <Card key={playlist.id} style={{height:'100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
-                    <Card.Body>
+                    <Card.Body className='d-flex flex-column'>
 
                         <div className="d-flex justify-content-between">
-                            <Card.Title>{playlist.name}</Card.Title>
+                            <Card.Title style={{fontSize:'2vw'}}>{playlist.name}</Card.Title>
                             <a href="/" onClick={(e) => addFavourite(e, playlist)}>
                                 <i className={subscribed.includes(playlist.id) ? 'fas fa-heart' : 'far fa-heart'}></i>
                             </a>
                         </div>
 
-                        <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />
-                        <div className='description overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
+                        <Card.Text className='mb-0 mt-0' style={{fontSize:'1.3vw'}}>Total Tracks: {playlist.tracks.total}</Card.Text><br />
+                        <div className='description overflow-ellipsis' style={{fontSize:'1.2vw'}} dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
 
-                        <Card.Link className="btn btn-primary" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
+                        <Card.Link className="btn btn-primary mt-auto" style={{fontSize:'1.2vw'}} onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>
                 </Card> 
                 </Col>
