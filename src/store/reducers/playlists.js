@@ -1,4 +1,4 @@
-import { SET_ARTISTS, SET_HOME_SEARCH_BAR, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
+import { SET_ARTISTS, SET_ARTIST_NAME, SET_HOME_SEARCH_BAR, SET_PLAYLISTS, SET_PLAYLIST_DETAIL, TOGGLE_LOADING, TOGGLE_ERROR } from '../actionTypes'
 
 const initialState = {
     appTitle: 'Your Classical Music Playlist',
@@ -7,7 +7,8 @@ const initialState = {
     error: false,
     loading: false,
     searchBar: '',
-    artists: []
+    artists: [],
+    artist_name: ''
 }
 
 function playlistReducer(state = initialState, action) {
@@ -23,7 +24,10 @@ function playlistReducer(state = initialState, action) {
         return { ...state, searchBar: action.payload }
     } else if (action.type === SET_ARTISTS ) {
         return { ...state, artists: action.payload }
+    } else if (action.type === SET_ARTIST_NAME ) {
+        return { ...state, artist_name: action.payload }
     }
+
 
     return state
 }

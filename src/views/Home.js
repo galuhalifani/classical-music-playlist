@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Card from 'react-bootstrap/Card'
+import { Card, Row, Col } from 'react-bootstrap'
 import Loader from "../components/Loader.js";
 import Error from "../components/Error.js";
 import NoData from "../components/NoData.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPlaylists } from '../store/actions/actionPlaylist'
 import { addFavourites } from '../store/actions/actionFavourite'
 import { useAlert } from 'react-alert'
 import '../App.css';
@@ -37,7 +36,6 @@ export default function Home(props) {
 
     useEffect(() => {
         activePage('home')
-        dispatch(fetchPlaylists())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -72,9 +70,11 @@ export default function Home(props) {
             : filteredPlaylist.length <= 0 
             ? <NoData/> 
             : 
-            <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            <Row className='playlistCard' xs={2} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            {/* <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { filteredPlaylist.map(playlist => 
-                <Card className='m-3' key={playlist.id} style={{width: '22rem', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px', marginBottom:'10px'}}>
+                <Col style={{marginBottom:'2%', marginTop: '2%'}}>
+                <Card key={playlist.id} style={{height:'100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>
 
@@ -91,8 +91,10 @@ export default function Home(props) {
                         <Card.Link className="btn btn-primary" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>
                 </Card> 
+                </Col>
             )}
-            </div>
+            {/* </div> */}
+            </Row>
           }
         </div>
     )
