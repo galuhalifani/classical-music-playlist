@@ -27,7 +27,7 @@
 
 .playlistCard {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 24rem);
+  grid-template-columns: repeat(auto-fill, 26rem);
   justify-content: space-between;
   /* grid-gap: 20px; */
 }
@@ -43,6 +43,20 @@
   display: flex;
   justify-content: space-between;
   /* grid-gap: 20px; */
+}
+
+@media (max-width: 500px) {
+  .playlistDetail {
+    flex-direction: column;
+  }
+
+  .playlistDetailCard {
+    width: 100%!important
+  }
+
+  .holds-the-iframe {
+    width: 100%!important
+  }
 }
 
 body {
@@ -119,3 +133,88 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.overflow-ellipsis-title {
+  overflow: hidden!important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cardbody {
+  width: 190px!important
+}
+
+.seeDetail {
+  display: none!important
+}
+
+.movieCol:hover .seeDetail {
+  display: block!important
+}
+
+.movieCol:hover .cardbody {
+  width: 350px!important
+}
+
+.movieDescription {
+  /* height: 100px; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.movieFavDescription {
+  /* height: 100px; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.movieCol:hover {
+  border: 2px solid black;
+  /* opacity: 100%; */
+}
+
+.movieCol:hover .cardImg {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  transform: scale(1.1)
+}
+
+.cardImgFav {
+  max-height:300px;
+  object-fit:cover;
+  object-position:top
+}
+
+.cardImgFav:hover {
+  margin-top: auto;
+  margin-bottom: auto;
+  object-fit: scale-down;
+  transform: scale(1.5)
+}
+
+.movieCol:hover .movieDescription {
+  text-overflow: unset;
+  overflow: hidden;
+  display: block
+}
+
+.movieCol:hover .movieFavDescription {
+  text-overflow: unset;
+  overflow: visible;
+  display: block
+}
+
+.movieCol:hover .title {
+  text-overflow: unset;
+  overflow: visible;
+  display: block
+}
+

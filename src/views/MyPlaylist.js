@@ -48,11 +48,11 @@ export default function MyPlaylist(props) {
             </div>
             : 
             <div>
-            <h1 style={{paddingLeft:'6%', paddingTop: '2%', paddingRight: '5%'}}>My Favourite Playlists</h1>
-            <Row className='playlistCardFav' xs={2} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            {/* <h1 style={{fontSize:'4vw', paddingLeft:'6%', paddingTop: '2%', paddingRight: '5%'}}>My Favourite Playlists</h1> */}
+            <Row className='playlistCardFav' xs={1} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '3%', paddingRight: '5%', paddingBottom: '10px'}}>
             {/* <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { favourites.map(playlist => 
-                <Col style={{marginBottom:'2%', marginTop: '2%'}}>
+                <Col style={{marginBottom:'2%', marginTop: '1%'}}>
                 <Card key={playlist.id} style={{height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
                     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>

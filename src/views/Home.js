@@ -70,28 +70,49 @@ export default function Home(props) {
             : filteredPlaylist.length <= 0 
             ? <NoData/> 
             : 
-            <Row className='playlistCard' xs={2} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
+            <Row className='playlistCard' xs={2} md={3} lg={4} style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             {/* <div className='playlistCard' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { filteredPlaylist.map(playlist => 
-                <Col style={{marginBottom:'2%', marginTop: '2%'}}>
-                <Card key={playlist.id} style={{height:'100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
-                    <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
-                    <Card.Body className='d-flex flex-column'>
-
+                <Col className='movieCol' style={{marginBottom:'4%', marginTop: '5%', maxWidth: '90vw', paddingRight: '5px', paddingLeft: '5px'}}>
+                <Card key={playlist.id} className='cardCol d-flex' style={{backgroundColor: 'black', flexDirection: 'row', border: '2px solid #eae0aa', marginRight:'5px'}}>
+                    <img className='cardImg' style={{height: '17rem', maxWidth: '160px', objectFit: 'cover'}} src={playlist.images[0].url} alt="Playlist Poster"/>
+                    <Card.Body className='cardbody d-flex flex-column'> 
+        
                         <div className="d-flex justify-content-between">
-                            <Card.Title style={{fontSize:'2vw'}}>{playlist.name}</Card.Title>
+                            <Card.Title className='title overflow-ellipsis-title' style={{fontSize: '22px', width: '83%', marginRight: '15px'}}>{playlist.name}
+                            </Card.Title>
                             <a href="/" onClick={(e) => addFavourite(e, playlist)}>
                                 <i className={subscribed.includes(playlist.id) ? 'fas fa-heart' : 'far fa-heart'}></i>
                             </a>
                         </div>
-
-                        <Card.Text className='mb-0 mt-0' style={{fontSize:'1.3vw'}}>Total Tracks: {playlist.tracks.total}</Card.Text><br />
-                        <div className='description overflow-ellipsis' style={{fontSize:'1.2vw'}} dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
-
-                        <Card.Link className="btn btn-primary mt-auto" style={{fontSize:'1.2vw'}} onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
+        
+                        <Card.Text className='mb-0 mt-0'>Total Tracks: {playlist.tracks.total}</Card.Text>
+                        <div style={{marginTop: '15px', marginRight: '2%'}} className='movieDescription overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
+        
+                        <Card.Link className="seeDetail btn btn-success mt-auto" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>
                 </Card> 
-                </Col>
+                </Col> 
+
+                // <Col style={{marginBottom:'2%', marginTop: '2%'}}>
+                // <Card key={playlist.id} style={{height:'100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
+                //     <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
+                //     <Card.Body className='d-flex flex-column'>
+
+                //         <div className="d-flex justify-content-between">
+                //             <Card.Title style={{fontSize:'2vw'}}>{playlist.name}</Card.Title>
+                //             <a href="/" onClick={(e) => addFavourite(e, playlist)}>
+                //                 <i className={subscribed.includes(playlist.id) ? 'fas fa-heart' : 'far fa-heart'}></i>
+                //             </a>
+                //         </div>
+
+                //         <Card.Text className='mb-0 mt-0' style={{fontSize:'1.3vw'}}>Total Tracks: {playlist.tracks.total}</Card.Text><br />
+                //         <div className='description overflow-ellipsis' style={{fontSize:'1.2vw'}} dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
+
+                //         <Card.Link className="btn btn-primary mt-auto" style={{fontSize:'1.2vw'}} onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
+                //     </Card.Body>
+                // </Card> 
+                // </Col>
             )}
             {/* </div> */}
             </Row>
