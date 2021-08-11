@@ -13,3 +13,4 @@ _(Backend API from Spotify)_
 ```React Bootstrap```
 ```React Redux```
 ```Lodash (Debouncer)```
+```Firebase```
