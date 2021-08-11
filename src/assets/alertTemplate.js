@@ -6,6 +6,7 @@ import { CloseIconSuccess, CloseIconError } from './icons/CloseIcon'
 const alertStyleSuccess = {
     backgroundColor: 'lightyellow',
     color: 'black',
+    zIndex: 5000,
     padding: '10px',
     paddingRight: '2px',
     fontWeight: 'bold',
@@ -22,6 +23,7 @@ const alertStyleSuccess = {
 
   const alertStyleError = {
     backgroundColor: '#260003',
+    zIndex: 2000, 
     color: 'white',
     padding: '10px',
     paddingRight: '2px',
@@ -40,6 +42,7 @@ const alertStyleSuccess = {
   const alertStyleInfo = {
     backgroundColor: 'white',
     color: 'black',
+    zIndex: 2000,
     padding: '10px',
     paddingRight: '2px',
     fontWeight: 'bold',

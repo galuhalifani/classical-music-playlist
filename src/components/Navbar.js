@@ -32,7 +32,7 @@ export default function Navigation(props) {
     , []);
 
     return (
-        <Navbar id='navbar' className='navbar-dark' expand='sm'>
+        <Navbar sticky="top" id='navbar' className='navbar-dark' expand='sm'>
             <Navbar.Brand className="navbar-brand" href="/">{appTitle}</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

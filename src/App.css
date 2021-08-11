@@ -57,6 +57,21 @@
   .holds-the-iframe {
     width: 100%!important
   }
+
+  .cardImgArtist {
+    height: 17rem!important;
+    object-fit: cover!important
+  }
+
+  .cardImgFav {
+    height: 17rem!important;
+    object-fit: cover!important
+  }
+
+  .cardImgDetails {
+    height: 17rem!important;
+    object-fit: cover!important
+  }
 }
 
 body {
@@ -142,7 +157,7 @@ body {
 }
 
 .cardbody {
-  width: 190px!important
+  width: 90px!important
 }
 
 .seeDetail {
@@ -153,9 +168,9 @@ body {
   display: block!important
 }
 
-.movieCol:hover .cardbody {
+/* .movieCol:hover .cardbody {
   width: 350px!important
-}
+} */
 
 .movieDescription {
   /* height: 100px; */
@@ -183,7 +198,7 @@ body {
 .movieCol:hover .cardImg {
   margin-top: auto;
   margin-bottom: auto;
-  margin-right: 10px;
+  margin-right: 4px;
   transform: scale(1.1)
 }
 

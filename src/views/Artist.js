@@ -66,15 +66,15 @@ export default function Artist(props) {
             <Row className='playlistCardFav' xs={1} md={3} lg={4} className="g-4" style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
             {/* <div className='playlistCardFav' style={{paddingLeft:'5%', paddingTop: '1%', paddingRight: '5%', paddingBottom: '10px'}}> */}
             { artists.map(artist => 
-                <Col style={{marginBottom:'2%', marginTop: '1%', textAlign: 'center'}}>
-                <Card className='m-2' key={artist.id} style={{width: '18rem', height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa'}}>
-                    <img className='class="card-img-top' src={artist.images[0].url} alt="Artist Poster"/>
-                    <Card.Body>
+                <Col key={artist.id} style={{marginBottom:'5%', marginTop: '1%', textAlign: 'center'}}>
+                <Card style={{marginRight: 'auto', marginLeft: 'auto', marginTop: '2%', marginBottom: '2%', width: '18rem', height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa'}}>
+                    <img className='cardImgArtist' src={artist.images[0].url} alt="Artist Poster"/>
+                    <Card.Body className='d-flex flex-column'>
                         <Card.Title className='overflow ellipsis'>{artist.name}</Card.Title>
 
                         <Card.Text className='mb-0 mt-0'>Total Tracks: {artist.total_tracks}</Card.Text><br />
 
-                        <iframe title="`{artist.id}`" src={`https://open.spotify.com/embed/album/${artist.id}`} width= '100%' height='80px' frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe className='mt-auto' title="`{artist.id}`" src={`https://open.spotify.com/embed/album/${artist.id}`} width= '100%' height='80px' frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </Card.Body>
                 </Card> 
                 </Col>

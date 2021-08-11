@@ -6,7 +6,7 @@ import NoData from "../components/NoData.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { addFavourites } from '../store/actions/actionFavourite'
-import { useAlert } from 'react-alert'
+import { useAlert } from '../assets/react-alert'
 import '../App.css';
 
 export default function Home(props) {
@@ -79,7 +79,7 @@ export default function Home(props) {
                     <Card.Body className='cardbody d-flex flex-column'> 
         
                         <div className="d-flex justify-content-between">
-                            <Card.Title className='title overflow-ellipsis-title' style={{fontSize: '22px', width: '83%', marginRight: '15px'}}>{playlist.name}
+                            <Card.Title className='title overflow-ellipsis-title' style={{fontSize: '22px', width: '83%', marginRight: '5px'}}>{playlist.name}
                             </Card.Title>
                             <a href="/" onClick={(e) => addFavourite(e, playlist)}>
                                 <i className={subscribed.includes(playlist.id) ? 'fas fa-heart' : 'far fa-heart'}></i>
@@ -87,7 +87,7 @@ export default function Home(props) {
                         </div>
         
                         <Card.Text className='mb-0 mt-0'>Total Tracks: {playlist.tracks.total}</Card.Text>
-                        <div style={{marginTop: '15px', marginRight: '2%'}} className='movieDescription overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
+                        <div style={{marginTop: '15px', marginRight: '10%'}} className='movieDescription overflow-ellipsis' dangerouslySetInnerHTML={playListDesc(playlist.description)}/><br />
         
                         <Card.Link className="seeDetail btn btn-success mt-auto" onClick={(e) => seePlaylist(e, playlist.id)}>See Playlist</Card.Link>
                     </Card.Body>

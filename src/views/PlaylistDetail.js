@@ -33,7 +33,7 @@ export default function PlaylistDetail(props) {
             <div className='playlistDetail m-3' style={{paddingLeft:'5%', paddingTop: '2%', paddingRight: '5%', paddingBottom: '10px'}}>
 
             <Card className='playlistDetailCard' style={{backgroundColor: 'black', marginRight:'25px', marginBottom:'10px', width: '30%'}}>
-                <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
+                <img className='cardImgDetails' src={playlist.images[0].url} alt="Playlist Poster"/>
                 <Card.Body>
                     <Card.Title>{playlist.name}</Card.Title>
                     <Card.Text className='mb-0 mt-0'><b>Total Tracks: {playlist.tracks.total}</b></Card.Text><br />

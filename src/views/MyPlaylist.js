@@ -54,7 +54,7 @@ export default function MyPlaylist(props) {
             { favourites.map(playlist => 
                 <Col style={{marginBottom:'2%', marginTop: '1%'}}>
                 <Card key={playlist.id} style={{height: '100%', backgroundColor: 'black', border: '2px solid #eae0aa', marginRight:'5px'}}>
-                    <img className='class="card-img-top' src={playlist.images[0].url} alt="Playlist Poster"/>
+                    <img className='cardImgFav' src={playlist.images[0].url} alt="Playlist Poster"/>
                     <Card.Body>
                         <Card.Title>{playlist.name}</Card.Title>
 

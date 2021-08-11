@@ -5,13 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { transitions, positions, Provider as AlertProvider } from './assets/react-alert'
 import AlertTemplate from './assets/alertTemplate'
 import store from './store/'
 
 const options = {
   position: positions.TOP_CENTER,
-  timeout: 5000,
+  timeout: 1000000000,
   offset: '30px',
   transition: transitions.FADE
 }
